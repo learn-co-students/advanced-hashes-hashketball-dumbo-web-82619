@@ -7,7 +7,8 @@ def game_hash
     team_name: "Brooklyn Nets",
     colors: ["Black", "White"],
     players: [
-      "Alan Anderson" => {
+      { 
+        player: "Alan Anderson",
         number: 0,
         shoe: 16,
         points: 22,
@@ -18,7 +19,8 @@ def game_hash
         slam_dunks: 1
       },
       
-      "Reggie Evans" => {
+      { 
+        player: "Reggie Evans", 
         number: 30,
         shoe: 14,
         points: 12,
@@ -29,7 +31,7 @@ def game_hash
         slam_dunks: 7
       },
       
-      "Brook Lopez" => {
+      { player: "Brook Lopez", 
         number: 11,
         shoe: 17,
         points: 17,
@@ -40,7 +42,8 @@ def game_hash
         slam_dunks: 15
       },
       
-      "Mason Plumlee" => {
+      { 
+        player: "Mason Plumlee", 
         number: 1,
         shoe: 19,
         points: 26,
@@ -51,7 +54,8 @@ def game_hash
         slam_dunks: 5
       },
       
-      "Jason Terry" => {
+      { 
+        plqyer: "Jason Terry", 
         number: 31,
         shoe: 15,
         points: 19,
@@ -68,7 +72,8 @@ def game_hash
     team_name: "Charlotte Hornets",
     colors: ["Turquoise", "Purple"],
     players: [
-      "Jeff Adrien" => {
+      { 
+        player: "Jeff Adrien", 
         number: 4,
         shoe: 18,
         points: 10,
@@ -79,7 +84,8 @@ def game_hash
         slam_dunks: 2
       },
       
-      "Bismack Biyombo" => {
+      { 
+        player: "Jeff Adrien", 
         number: 0,
         shoe: 16,
         points: 12,
@@ -90,7 +96,8 @@ def game_hash
         slam_dunks: 10
       },
       
-      "DeSagna Diop" => {
+      { 
+        player: "Jeff Adrien", 
         number: 2,
         shoe: 14,
         points: 24,
@@ -101,7 +108,8 @@ def game_hash
         slam_dunks: 5
       },
       
-      "Ben Gordon" => {
+      { 
+        player: "Ben Gordon", 
         number: 8,
         shoe: 15,
         points: 33,
@@ -112,7 +120,8 @@ def game_hash
         slam_dunks: 0
       },
       
-      "Kemba Walker" => {
+      { 
+        player: "Kemba Walker", 
         number: 33,
         shoe: 15,
         points: 6,
