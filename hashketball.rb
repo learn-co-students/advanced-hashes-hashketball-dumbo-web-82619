@@ -111,19 +111,6 @@ def game_hash
   }
 end
 
-def num_points_scored(inquired_player)
-  game_hash.each do |hm_or_aw, team_info|
-    team_info.each do |characteristics, raw_data|
-        next unless characteristics == :name
-        
-        raw_data.each do |player|
-          if player[:name] == inquired_player 
-            return player[:points]
-          end 
-        end 
-    end  
-  end 
-end
 
 
-num_points_scored('Kemba Walker')
+
