@@ -111,6 +111,16 @@ def game_hash
   }
 end
 
-
-
-
+def num_points_scored(inquired_player)
+  game_hash.each do |h_or_a, team_info|
+    team_info.each do |descriptions, team_data|
+      next unless descriptions == :players
+      
+      team_data.each do |players_data|
+        if players_data[:name] == inquired_player 
+          return players_data[:points]
+        end
+      end 
+    end 
+  end 
+end 
