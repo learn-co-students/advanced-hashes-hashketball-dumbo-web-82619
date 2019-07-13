@@ -162,13 +162,13 @@ def player_numbers(team_name)
   array = []
   
   game_hash.each do |area, team|
-    next unless team[:team_name]
+    next unless team[:team_name] == team_name
     
     team.each do |team_info, data|
       next unless team_info == :players
       
       data.each do |player_hash|
-        array.push(player_hash[:number])
+        array << player_hash[:number]
       end 
     end 
   end
