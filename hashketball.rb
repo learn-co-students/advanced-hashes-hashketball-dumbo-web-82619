@@ -147,4 +147,17 @@ def team_colors(inquired_team)
   end 
 end 
 
+def team_names
+  array = []
+  game_hash.each do |area, team_info|
+    team_info.each do |description, team_data|
+      next unless description == :team_name
+      array << team_data
+    end
+  end 
+  array
+end 
 
+def player_numbers(team_name)
+  
+end 
