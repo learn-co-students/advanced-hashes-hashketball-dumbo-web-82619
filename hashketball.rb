@@ -164,13 +164,68 @@ def player_numbers(team_name)
   game_hash.each do |area, team|
     next unless team[:team_name] == team_name
     
-    team.each do |team_info, data|
-      next unless team_info == :players
+    team.each do |characteristic, data|
+      next unless characteristic == :players
       
       data.each do |player_hash|
         array << player_hash[:number]
       end 
     end 
-  end
+  end 
   array
 end 
+
+def player_stats(player_name)
+  game_hash.each do |area, team|
+    team.each do |characteristic, data|
+      next unless characteristic == :players 
+      
+      data.each do |player_hash|
+        if player_hash[:name] == player_name
+          return player_hash.reject! {|n| n == :name}
+        end 
+      end 
+    end 
+  end 
+end
+
+def big_shoe_rebounds
+  biggest_shoe = 0 
+  rebounds = 0 
+  
+  game_hash.each do |area, data| 
+    data[:players].each do |player_hash|
+      if player_hash[:shoe] > biggest_shoe
+        biggest_shoe = player_hash[:shoe]
+        rebounds = player_hash[:rebounds]
+      end 
+    end 
+  end 
+  rebounds
+end 
+
+def most_points_scored
+  most_points = 0
+  player = nil 
+  
+  game_hash.each do |area, data|
+    data[:players].each do |player_hash|
+      if player_hash[:points] > most_points
+        most_points = player_hash[:points]
+        player = player_hash[:name]
+      end 
+    end 
+  end 
+  player
+end 
+
+def winning_team
+  points = {
+    "Brooklyn Nets" => 0,
+    "Charlotte Hornets" => 0 
+  }
+  
+  
+end 
+
+
