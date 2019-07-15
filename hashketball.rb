@@ -233,5 +233,15 @@ def winning_team
   new_hash.key(new_hash.values.max)
 end 
   
+def player_with_longest_name
+  array = []
+  
+  game_hash.values.each do |game_data|
+    game_data[:players].each do |player_hash|
+      array << player_hash[:name]
+    end 
+  end
+  array.max_by {|player_name| player_name.length}
+end 
 
 
