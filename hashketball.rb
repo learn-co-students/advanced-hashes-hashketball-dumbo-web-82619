@@ -220,16 +220,18 @@ def most_points_scored
 end 
 
 def winning_team
-  score = {
-    "Brooklyn Nets" => 0,
-    "Charlotte Hornets" => 0 
-  }
+  new_hash = {}
   
-  game_hash.each do |team, game_data|
-    game_hash[:players].each do |player_hash|
-      
+  game_hash.values.each do |game_data|
+    points_scored = 0 
+    
+    game_data[:players].each do |player_hash|
+      points_scored += player_hash[:points]
     end 
+    new_hash[game_data[:team_name]] = points_scored
   end 
+  new_hash.key(new_hash.values.max)
 end 
+  
 
 
