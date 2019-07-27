@@ -12,13 +12,12 @@ hash = {
     
   }
 }
-hash
+
 end
 
 def num_points_scored (player)
   hash = game_hash()
   index = 0
-  #binding.pry
   while index < hash[:home][:players].length
     if hash[:home][:players][index][player]
       return hash[:home][:players][index][player][:points]
@@ -62,15 +61,14 @@ end
 
 def player_numbers (team)
   hash = game_hash()
-  hash.reduce([]) do |numbers, (home_or_away,stats)|
-  if hash[home_or_away][:team_name] == team
-    hash[home_or_away][:players].each do |player|
-    numbers << player.values[0][:number]
-    #binding.pry
+  hash.reduce([]) do |numbers, (home_or_away, stats)|
+    if hash[home_or_away][:team_name] == team
+      hash[home_or_away][:players].each do |player|
+      numbers << player.values[0][:number]
+      end
     end
-  end
   numbers
-end
+  end
 end
 
 def player_stats(player)
@@ -88,10 +86,69 @@ end
 
 def big_shoe_rebounds()
   hash = game_hash()
-  player = hash.reduce(nil) do |player, (home_or_away, stats)|
-    stats[:players].each do |person|
-      player = person.keys.to_s
-      if 
+  rebounds = hash.reduce(nil) do |rebounds, (home_or_away, stats)|
+  index = 0
+  rebounds = stats[:players][index].values[0][:rebounds] if !rebounds
+  player = stats[:players][index].keys[0]
+  biggest_shoe = stats[:players][index].values[0][:shoe]
+  while index < stats[:players].length
+    if stats[:players][index].values[0][:shoe] > biggest_shoe
+      biggest_shoe = stats[:players][index].values[0][:shoe]
+      player = stats[:players][index].keys[0]
+      rebounds = stats[:players][index].values[0][:rebounds]
+    end
+    index += 1
+  end
+  rebounds
   end 
 end
+
+def most_points_scored ()
+  hash = game_hash()
+  hash.reduce(nil) do |player, (home_or_away, stats)|
+    player = stats[:players].max do |player1, player2|
+    player1.values[0][:points] <=> player2.values[0][:points] 
+    end
+    player.keys[0]
+  end
+end
+
+def winning_team()
+  hash = game_hash()
+    home_points = 0
+    away_points = 0
+    hash[:home][:players].each do |player|
+      home_points += player.values[0][:points]
+    end
+    hash[:away][:players].each do |player|
+      away_points += player.values[0][:points]
+    end
+    home_points > away_points ? hash[:home][:team_name] : hash[:away][:team_name]
+end
+
+def player_with_longest_name ()
+  hash = game_hash()
+  hash.reduce(nil) do |name, (home_or_away, stats)|
+    player = stats[:players].max do |player1, player2|
+      player1.keys[0].length <=> player2.keys[0].length
+    end
+    player.keys[0]
+  end
+end
+      
+def long_name_steals_a_ton? ()
+  hash = game_hash()
+  long_name = player_with_longest_name()
+  hash.reduce(true) do |true_or_false, (home_or_away, stats)|
+    most_steals = player_stats(long_name)[:steals]
+    stats[:players].each do |player|
+    if player.values[0][:steals] > most_steals
+      true_or_false = false 
+    end
+  end
+  true_or_false
+end
+end
+      
     
+  
