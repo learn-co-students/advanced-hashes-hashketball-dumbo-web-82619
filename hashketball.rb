@@ -150,3 +150,12 @@ def player_numbers(acquired_team_name)
   end 
   array
 end 
+
+
+def player_stats(player_name)
+  game_hash.values.each do |game_data|
+    game_data[:players].each do |player|
+      return player.reject! {|name| name == :name} if player[:name] == player_name
+    end 
+  end 
+end   
