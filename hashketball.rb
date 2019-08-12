@@ -145,17 +145,60 @@ def player_numbers(acquired_team_name)
   array = []
   game_hash.values.each do |team_data|
     team_data[:players].each do |player_hash|
-      array << player_hash[:number] if team_data[:team_name] == acquired_team_name
+      array << player_hash[:number] if team_data[:team_name] == acquired_team_name  
     end 
   end 
-  array
+  array 
 end 
 
-
 def player_stats(player_name)
-  game_hash.values.each do |game_data|
-    game_data[:players].each do |player|
-      return player.reject! {|name| name == :name} if player[:name] == player_name
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      return player_hash.reject {|name| name == :name} if player_hash[:name] == player_name
     end 
   end 
 end   
+
+def big_shoe_rebounds 
+  biggest_shoes = 0 
+  rebounds = 0 
+  
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      if player_hash[:shoe] > biggest_shoes
+        biggest_shoes = player_hash[:shoe] 
+        rebounds = player_hash[:rebounds] 
+      end 
+    end 
+  end 
+  rebounds
+end   
+
+def most_points_scored
+  most_points = 0 
+  most_points_player = nil 
+  
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      if player_hash[:points] > most_points
+        most_points = player_hash[:points]
+        most_points_player = player_hash[:name]
+      end 
+    end 
+  end 
+  most_points_player
+end 
+
+def winning_team
+  new_hash = {}
+  game_hash.values.each do |team_data|
+    points_scored = 0   
+    team_data[:players].each do |player_hash|
+      points_scored += player_hash[:points]  
+    end 
+    new_hash[team_data[:team_name]] = points_scored
+  end  
+  new_hash.key(new_hash.values.max)
+end   
+  
+  
