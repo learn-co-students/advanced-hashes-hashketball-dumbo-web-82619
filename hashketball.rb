@@ -112,11 +112,7 @@ def game_hash
 end
 
 def num_points_scored(player_name)
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      return player_hash[:points] if player_hash[:name] == player_name
-    end 
-  end 
+  
 end 
 
 def shoe_size(player_name)
@@ -142,36 +138,15 @@ def team_names
 end 
 
 def player_numbers(acquired_team_name)
-  array = []
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      array << player_hash[:number] if team_data[:team_name] == acquired_team_name  
-    end 
-  end 
-  array 
+  
 end 
 
 def player_stats(player_name)
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      return player_hash.reject {|name| name == :name} if player_hash[:name] == player_name
-    end 
-  end 
+  
 end   
 
 def big_shoe_rebounds 
-  biggest_shoes = 0 
-  rebounds = 0 
   
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      if player_hash[:shoe] > biggest_shoes
-        biggest_shoes = player_hash[:shoe] 
-        rebounds = player_hash[:rebounds] 
-      end 
-    end 
-  end 
-  rebounds
 end   
 
 def most_points_scored
@@ -190,40 +165,14 @@ def most_points_scored
 end 
 
 def winning_team
-  new_hash = {}
-  game_hash.values.each do |team_data|
-    points_scored = 0   
-    team_data[:players].each do |player_hash|
-      points_scored += player_hash[:points]  
-    end 
-    new_hash[team_data[:team_name]] = points_scored
-  end  
-  new_hash.key(new_hash.values.max)
+  
 end   
   
 def player_with_longest_name
-  array = []
   
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      array << player_hash[:name]
-    end 
-  end 
-  array.max_by {|name| name.length}
 end 
 
 def long_name_steals_a_ton?
-  most_steals_name = nil 
-  most_steals_num = 0 
   
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      if player_hash[:steals] > most_steals_num
-        most_steals_num = player_hash[:steals]
-        most_steals_name = player_hash[:name]
-      end 
-    end 
-  end 
-  return true if most_steals_name == player_with_longest_name
 end 
 
