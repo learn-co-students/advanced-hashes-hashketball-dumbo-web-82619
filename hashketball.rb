@@ -142,14 +142,7 @@ def team_names
 end 
 
 def player_numbers(acquired_team_name)
-  numbers = []
   
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      numbers << player_hash[:number] if team_data[:team_name] == acquired_team_name
-    end 
-  end 
-  numbers
 end 
 
 def player_stats(player_name)
@@ -161,18 +154,7 @@ def player_stats(player_name)
 end   
 
 def big_shoe_rebounds 
-  biggest_shoe = 0 
-  rebounds = 0 
   
-  game_hash.values.each do |team_data|
-    team_data[:players].each do |player_hash|
-      if player_hash[:shoe] > biggest_shoe
-        biggest_shoe = player_hash[:shoe]
-        rebounds = player_hash[:rebounds]
-      end 
-    end 
-  end 
-  rebounds
 end   
 
 def most_points_scored
@@ -191,16 +173,7 @@ def most_points_scored
 end 
 
 def winning_team
-  new_hash = {}
   
-  game_hash.values.each do |team_data|
-    points_scored = 0 
-    team_data[:players].each do |player_hash|
-      points_scored += player_hash[:points]      
-    end 
-    new_hash[team_data[:team_name]] = points_scored
-  end 
-  new_hash.key(new_hash.values.max)
 end   
   
 def player_with_longest_name
@@ -215,16 +188,5 @@ def player_with_longest_name
 end 
 
 def long_name_steals_a_ton? 
-  max_steals_nam = nil 
-  max_steals_num = 0 
   
-  game_hash.values.each do |game_data|
-    game_data[:players].each do |player|
-      if player[:steals] > max_steals_num
-        max_steals_num = player[:steals]
-        max_steals_nam = player[:name]
-      end 
-    end 
-  end 
-  return true if max_steals_nam == player_with_longest_name
 end 
