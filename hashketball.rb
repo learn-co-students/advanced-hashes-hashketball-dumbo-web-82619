@@ -204,13 +204,27 @@ def winning_team
 end   
   
 def player_with_longest_name
+  array = []
   
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      array << player_hash[:name]
+    end 
+  end 
+  array.max_by {|name| name.length}
 end 
 
-def long_name_steals_a_ton?
-  max_steals = 0 
-  max_steals_player = nil 
+def long_name_steals_a_ton? 
+  max_steals_nam = nil 
+  max_steals_num = 0 
   
-  
+  game_hash.values.each do |game_data|
+    game_data[:players].each do |player|
+      if player[:steals] > max_steals_num
+        max_steals_num = player[:steals]
+        max_steals_nam = player[:name]
+      end 
+    end 
+  end 
+  return true if max_steals_nam == player_with_longest_name
 end 
-
