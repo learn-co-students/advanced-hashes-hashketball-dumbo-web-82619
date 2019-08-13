@@ -112,7 +112,11 @@ def game_hash
 end
 
 def num_points_scored(player_name)
-  
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      return player_hash[:points] if player_hash[:name] == player_name
+    end 
+  end 
 end 
 
 def shoe_size(player_name)
@@ -138,15 +142,37 @@ def team_names
 end 
 
 def player_numbers(acquired_team_name)
+  numbers = []
   
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      numbers << player_hash[:number] if team_data[:team_name] == acquired_team_name
+    end 
+  end 
+  numbers
 end 
 
 def player_stats(player_name)
-  
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      return player_hash.reject{|name| name == :name} if player_hash[:name] == player_name
+    end 
+  end 
 end   
 
 def big_shoe_rebounds 
+  biggest_shoe = 0 
+  rebounds = 0 
   
+  game_hash.values.each do |team_data|
+    team_data[:players].each do |player_hash|
+      if player_hash[:shoe] > biggest_shoe
+        biggest_shoe = player_hash[:shoe]
+        rebounds = player_hash[:rebounds]
+      end 
+    end 
+  end 
+  rebounds
 end   
 
 def most_points_scored
@@ -165,7 +191,16 @@ def most_points_scored
 end 
 
 def winning_team
+  new_hash = {}
   
+  game_hash.values.each do |team_data|
+    points_scored = 0 
+    team_data[:players].each do |player_hash|
+      points_scored += player_hash[:points]      
+    end 
+    new_hash[team_data[:team_name]] = points_scored
+  end 
+  new_hash.key(new_hash.values.max)
 end   
   
 def player_with_longest_name
@@ -173,6 +208,9 @@ def player_with_longest_name
 end 
 
 def long_name_steals_a_ton?
+  max_steals = 0 
+  max_steals_player = nil 
+  
   
 end 
 
