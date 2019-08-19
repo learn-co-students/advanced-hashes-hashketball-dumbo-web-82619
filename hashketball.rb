@@ -255,6 +255,151 @@ def big_shoe_rebounds
  #  binding.pry
 end
 
+def most_points_scored
+    most_points = 0
+   point_leader = "fake name"
+   
+  game_hash.each do |location, team|
+  #binding.pry
+    team.each do |key, value|
+    #binding.pry
+      if key == :players
+         value.each do |data|
+       
+        # binding.pry
+          if data[:points] > most_points
+            #binding.pry 
+          most_points = data[:points]
+         point_leader = data[:player_name]
+          #binding.pry
+    
+          end
+        end
+      end
+    end
+  end
+   
+ point_leader
+ #  binding.pry
+end
+
+
+def winning_team
+  
+homet=0 
+awayt = 0
+homen = game_hash[:home][:team_name]
+
+awayn = game_hash[:away][:team_name]
+
+  game_hash.each do |location, team|
+  #binding.pry
+    team.each do |key, value|
+    #binding.pry
+      if key == :players
+         value.each do |data|
+       
+        # binding.pry
+          if location == :home
+            homet += data[:points]
+            
+          if location == :away
+            binding.pry
+            awayt += data[:points]
+    end
+          end
+        end
+      end
+    end
+  end
+homet > awayt ? homen : awayn
+end
+
+def player_with_longest_name
+longest_name = nil
+longest_name_length = 0
+
+  game_hash.each do |location, team|
+  #binding.pry
+    team.each do |key, value|
+    #binding.pry
+      if key == :players
+         value.each do |data|
+       
+        # binding.pry
+          if data[:player_name].length > longest_name_length 
+            #binding.pry 
+          longest_name = data[:player_name]
+         longest_name_length = data[:player_name].length
+          #binding.pry
+    
+          end
+        end
+      end
+    end
+  end
+   
+longest_name
+ #  binding.pry
+end
+
+
+
+
+
+
+
+
+
+
+
+def long_name_steals_a_ton?
+longest_name = nil
+longest_name_length = 0
+stealer = nil
+most_steals = 0 
+
+  game_hash.each do |location, team|
+  #binding.pry
+    team.each do |key, value|
+    #binding.pry
+      if key == :players
+         value.each do |data|
+       
+        # binding.pry
+          if data[:player_name].length > longest_name_length 
+            #binding.pry 
+          longest_name = data[:player_name]
+         longest_name_length = data[:player_name].length
+          #binding.pry
+    
+          end
+        end
+      end
+    end
+  end
+  game_hash.each do |location, team|
+  team.each do |key, value|
+    #binding.pry
+      if key == :players
+         value.each do |data|
+       
+        # binding.pry
+          if data[:steals] > most_steals
+            #binding.pry 
+          most_steals = data[:steals]
+         stealer = data[:player_name]
+          #binding.pry
+    
+          end
+        end
+      end
+    end
+  end
+   
+longest_name == stealer ? true : false
+ #  binding.pry
+end
 
 
 #num_points_scored(game_hash)
