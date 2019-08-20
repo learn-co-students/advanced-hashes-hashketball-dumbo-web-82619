@@ -205,6 +205,75 @@ end
 rebounds
 end
 
+def most_points_scored
+  best_guy = nil
+  points = 0 
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |player|
+      if player.values[0][:points] > points 
+        points = player.values[0][:points]
+        best_guy = player.keys.join 
+         #binding.pry
+      
+  end
+  end
+  end
+   
+  best_guy
+end
 
+def winning_team
+nets_total = 0 
+hornets_total = 0 
+game_hash[:home][:players].each do |player|
+  nets_total += player.values[0][:points]
+end
+game_hash[:away][:players].each do |player|
+  hornets_total += player.values[0][:points]
+end
+if nets_total > hornets_total
+  p "Brooklyn Nets"
+else
+  p "Charlotte Hornets"
+end
+end
 
+def player_with_longest_name
+  long_guy = nil
+  name_length = 0
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |player|
+      if player.keys.join.length > name_length
+        name_length = player.keys.join.length 
+        long_guy = player.keys.join
+    end
+end
+end
+long_guy
+end
+
+def long_name_steals_a_ton?
+  long_guy = nil
+  name_length = 0
+  steals= 0
+  long_steals_guy = nil
+  steals_guy = nil
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |player|
+      if player.keys.join.length > name_length
+        name_length = player.keys.join.length 
+        long_guy = player.keys.join
+      end
+      if player.values[0][:steals] > steals
+        steals = player.values[0][:steals]
+        steals_guy = player.keys.join        
+      end     
+    end         
+  end  
+if steals_guy == long_guy 
+  p true
+else
+  p false 
+end
+end
 
