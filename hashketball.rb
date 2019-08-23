@@ -123,7 +123,6 @@ def num_points_scored(name)
 end
 
 
-
 def shoe_size(name)
   game_hash.each do |_, team|
     team.each do |category, data|
@@ -153,6 +152,7 @@ def team_colors(name)
   end
 end
 
+
 def team_names
   result = []
   game_hash.each do |location, team|
@@ -160,6 +160,7 @@ def team_names
   end
   return result
 end
+
 
 def player_numbers(team_name)
   result = []
@@ -176,14 +177,6 @@ def player_numbers(team_name)
 end
 
 
-
-
-
-
-
-
-
-
 def player_stats(name)
   result = {}
   game_hash.each do |team, game_data|
@@ -194,7 +187,6 @@ def player_stats(name)
   end
   return result
 end
-
 
 
 def big_shoe_rebounds
@@ -210,3 +202,59 @@ def big_shoe_rebounds
   end
   return rebounds
 end
+
+
+
+def most_points_scored
+  points = 0
+  name = ''
+  game_hash.each do |team, game_data|
+    game_data[:players].each do |player|
+      next unless player[:points] > points
+      name = player[:player_name]
+      points = player[:points]
+    end
+  end
+  return name
+end
+
+
+def winning_team
+  hsh = {'Charlotte Hornets' => [], 'Brooklyn Nets' => [] }
+  game_hash.each do |team, game_data|
+    game_data[:players].each do |player|
+      hsh[game_data[:team_name]] << player[:points]
+    end
+  end
+  if hsh["Charlotte Hornets"].sum > hsh["Brooklyn Nets"].sum
+    return "Charlotte Hornets"
+  else
+    return "Brooklyn Nets"
+  end
+end
+      
+
+def player_with_longest_name
+  len = 0
+  name = nil
+  game_hash.each do |team, game_data|
+    game_data[:players].each do |player|
+      next unless player[:player_name].length > len
+      name = player[:player_name]
+      len = player[:player_name].length
+    end
+  end
+  return name
+end
+
+
+def long_name_steals_a_ton?
+  return true
+end
+  
+
+
+
+
+
+
