@@ -242,8 +242,107 @@ def big_shoe_rebounds
   }
 end
 
+def most_points_scored
+  most_points = 0
+  player_name = ""
+  game_hash[:home][:players].each {|player_array|
+    player_array.each {|player,stats|
+      if stats[:points] > most_points
+      most_points = stats[:points]
+      player_name = player
+      end
+    }
+  }
+  game_hash[:away][:players].each {|player_array|
+    player_array.each {|player,stats|
+      if stats[:points] > most_points
+      most_points = stats[:points]
+      player_name = player
+      end
+    }
+  }
+  player_name
+end
+
+def winning_team
+  home_score = 0
+  away_score = 0
+   game_hash[:home][:players].each {|player_array|
+    player_array.each {|player,stats|
+      home_score += stats[:points]
+    }
+  }
+  game_hash[:away][:players].each {|player_array|
+    player_array.each {|player,stats|
+      away_score += stats[:points]
+    }
+  }
+  home_score > away_score ? game_hash[:home][:team_name] : game_hash[:away][:team_name] 
+end
+
+def player_with_longest_name
+  name_count = 0
+  longest_player_name = ""
+  game_hash[:home][:players].each {|player_array|
+    player_array.each {|player,stats|
+      if player.length > name_count
+      name_count = player.length
+      longest_player_name = player
+      end
+    }
+  }
+  game_hash[:away][:players].each {|player_array|
+    player_array.each {|player,stats|
+       if player.length > name_count
+      name_count = player.length
+      longest_player_name = player
+      end
+    }
+  }
+  longest_player_name
+end
 
 
-
-
+def long_name_steals_a_ton?
+  highest_steals = 0
+  longest_steals = 0
+  name_count = 0
+  longest_player_name = ""
+  game_hash[:home][:players].each {|player_array|
+    player_array.each {|player,stats|
+      if player.length > name_count
+      name_count = player.length
+      longest_player_name = player
+      longest_steals = stats[:steals]
+      end
+    }
+  }
+  game_hash[:away][:players].each {|player_array|
+    player_array.each {|player,stats|
+       if player.length > name_count
+      name_count = player.length
+      longest_player_name = player
+      longest_steals = stats[:steals]
+      end
+    }
+  }
+  game_hash[:home][:players].each {|player_array|
+    player_array.each {|player,stats
+    |
+      if stats[:steals] > highest_steals
+      highest_steals = stats[:steals]
+      longest_player_name = player
+      end
+    }
+  }
+  game_hash[:away][:players].each {|player_array|
+    player_array.each {|player,stats|
+       if player.length > name_count
+      name_count = player.length
+      longest_player_name = player
+      end
+    }
+  }
+  longest_steals > highest_steals ? true : false
+end
 
